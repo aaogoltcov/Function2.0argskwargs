@@ -87,6 +87,7 @@ class PhoneBook:
         for contact in self.contact_list:
             if contact['name'] == name and contact['surname'] == surname:
                 self.contact_list.remove(contact)
+        print('Контакт удален!')
 
 
 def main():
@@ -98,7 +99,7 @@ def main():
     while command != 'q':
         command = input(
             'Введите команду (q - выйти, sp - поиск и вывод информации, a - добавление контакта, f - поиск и вывод '
-            'избранных номеров): ')
+            'избранных номеров, d - удаление контактов): ')
         if command == 'sp':
             name = input('Введите имя: ')
             surname = input('Введите фамилию: ')
@@ -134,6 +135,10 @@ def main():
         elif command == 'f':
             favorite = input('Введите какие пользователей вы хотите найти (True - избранные, False - не избранные): ')
             phone_book.show_favorites(favorite)
+        elif command == 'd':
+            name = input('Введите имя: ')
+            surname = input('Введите фамилию: ')
+            phone_book.delete_contact(name, surname)
         elif command == 'q':
             pass
         else:
