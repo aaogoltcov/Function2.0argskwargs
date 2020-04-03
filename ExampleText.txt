@@ -1,0 +1,10 @@
+Начинаем работу функции adv_print!
+Lorem ipsum dolor sit amet, consectetur adipiscing
+elit, sed do eiusmod tempor incididunt ut labore 
+t dolore magna aliqua. Ut enim ad minim veniam, q
+is nostrud exercitation ullamco laboris nisi ut a
+iquip ex ea commodo consequat. Duis aute irure do
+or in reprehenderit in voluptate velit esse cillu
+ dolore eu fugiat nulla pariatur. Excepteur sint 
+ccaecat cupidatat non proident, sunt in culpa qui
+
