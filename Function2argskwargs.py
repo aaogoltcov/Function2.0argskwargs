@@ -1,4 +1,31 @@
 import json
+import time
+
+
+def args_to_string(*args, **kwargs):
+    return f'{json.dumps(args)}_{json.dumps(kwargs)}'
+
+
+def logging_decorator(**path):
+    def decorator(function):
+        log_file = {
+            'start_time_function': time.asctime(),
+            'function_name': function.__name__
+        }
+
+        def logging(*args, **kwargs):
+            log_file.update(arguments=args_to_string(*args, **kwargs))
+            log_file.update(result=function(*args, **kwargs))
+            if path:
+                with open(path['path'], 'a', encoding='utf-8') as file:
+                    file.write(json.dumps(log_file, ensure_ascii=False))
+            else:
+                pass
+            return function
+
+        return logging
+
+    return decorator
 
 
 class Contact:
@@ -90,6 +117,7 @@ class PhoneBook:
         print('Контакт удален!')
 
 
+@logging_decorator(path='log_file.json')
 def main():
     phone_book = PhoneBook('PhoneBook')
     print('Читаю PhoneBook.json...')
@@ -147,6 +175,7 @@ def main():
     print('Записываю PhoneBook.json и выхожу...')
     with open('PhoneBook.json', 'w') as file:
         file.write(json.dumps(phone_book.contact_list))
+    return phone_book.contact_list
 
 
 main()
@@ -158,6 +187,7 @@ example_text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
                'qui officia deserunt mollit anim id est laborum. '
 
 
+@logging_decorator(path='log_file.json')
 def adv_print(args, **kwargs):
     max_line = int()
     start = str()
@@ -192,6 +222,7 @@ def adv_print(args, **kwargs):
         print(source_string, file=source_file)
         source_file.close()
         print(f'Файл {in_file} записан!')
+    return source_string
 
 
 print('\nЗадание со звездочкой: ')
